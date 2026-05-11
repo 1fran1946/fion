@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href=
-"data:image/gif;base64,R0lGODlhEAAQAKIAACoR5Pr//+HB2vcIXDSKD4Y3NwAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQEewABACwAAAAAEAAQAAADRAi6zBFAyEmlgnXoQQGMklaMnOVF2zAWm4UJaeyCcFwKZyUQel7xFR8BSAT6drzkcDYZOp1MyXM5WfyAVYWud2p4L4EEADs=">
+"data:image/gif;base64,R0lGODlhEAAQAKIAAI+C8vr//+fokQg49x44JoY3NwAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQEewABACwAAAAAEAAQAAADRAi6zBFAyEmlgnXoQQGMklaMnOVF2zAWm4UJaeyCcFwKZyUQel7xFR8BSAT6drzkcDYZOp1MyXM5WfyAVYWud2p4L4EEADs=">
 
   <title>иконка для</title>
   <style>
@@ -19,18 +19,35 @@
 */
 
 * {font-family: monospace}
-#zwai{margin:-36px auto 0; width:220px; aspect-ratio:1;
-	background-size: cover; border:2px solid blue;
+#zwai{ /* зона рисования */
+	margin:-52px auto 0; 
+	width:220px; aspect-ratio:1; height: 220px;
+	border:2px solid blue;
+	background-size: cover;
 	}
-button{margin:2px;}
-#apr {margin: auto;padding: 10px; border:3px solid purple; width:50%;box-sizing:border-box;}
+input {margin: 2px}	
+button{margin:2px}
+button:last-child {
+	margin-top: 33px;
+	b0ackground: red;          
+	} 
+#apr {/* пульт */
+	margin: auto; padding: 10px;
+	width: 50%;
+	box-sizing:border-box;
+	border:3px solid purple;
+	}
 
-#king {margin: 2px; padding: 10px; border:3px solid purple; width:50%;box-sizing:border-box;
-height:100px;
-}
-input {margin: 2px;}
+#king { /* картинка в бэйс64 */
+	margin: 2px; padding: 10px; 
+	width:50%;
+	height:100px;
+	box-sizing:border-box;
+	border:3px solid purple;
+	}
+
 /*****************************/
-#cop{
+#cop{ /* посредник при копировании */ 
 	width: calc(100% - 6px);
 	height: 222px;
 	background: #ded;
@@ -38,9 +55,21 @@ input {margin: 2px;}
 	left: -9999px;
 	}
 /*******************************/
-#katy {p0osition:relative; display: flex; justify-content: space-between; align-items: flex-start;b0ackground:teal}
-#k0aty::before {position: absolute; top:44px; left: 23px; content:attr(data-cat); color: white;}
+#katy {/* мешок кнопок */
+	display: flex; 
+	justify-content: space-between; 
+	align-items: flex-start;/* препятствовать растяг инпута на всю высоту */
+	b0ackground:lime;     
+	}
+#pot {width: 44px}/*номер цвета в палитре*/
 
+.iris { /* боковой набор кнопок */
+	p0adding: 5px;     
+	width:fit-content; 
+	display:flex;
+	flex-direction:column
+	}
+/******************************/
 @media screen and (max-width: 512px) {
 	#king {width:95%}
 	#apr {width:95%}
@@ -56,21 +85,14 @@ input {margin: 2px;}
 </center>
 <div id="apr">
 	<div id="katy" data-cat="0">
-		<div style="padding: 5px;width:fit-content; display:flex;flex-direction:column;b0ackground:lime;">
-		<input id="zyk" type="color">
-		<button id="prio">paste</button>
+		<div class="iris">
+			<input id="zyk" type="color">
+			<button id="prio">paste</button>
 		</div>
-		<input id="pot" type="number" value="0" min="0"
-		style="width:44px"
-		onchange="
-		x1=+this.value+4;
-		//alert(pis[x1]);
-		bmw();
-		">
-		<div style="padding: 5px;width:fit-content; display:flex;flex-direction:column;b0ackground:lime;">
-		<button id="robo">copy</button>
-		<button id="wash" onclick="king.value=null">clear</button>
-
+		<input id="pot" type="number" value="0" min="0">
+		<div class="iris">
+			<button id="robo">copy</button>
+			<button id="wash" onclick="king.value=null">clear</button>
 		</div>
 	</div>
 	<div id="zwai"></div>
@@ -80,14 +102,14 @@ input {margin: 2px;}
 
 
 <script>
-/*type="number" style="w0idth:44px; h0eight:3px"✂
-<button id="oxz"></button><button id="oyz"></button>✂
+/*
+
 html высота input растягивается на всю высоту родителя, если родитель flex. как побороть? мешало align-items: stretch✂
 */     
 
 let x2=0; let x1=x2+4;
 //let x1=0;✂
-pot.value=x2;//x2;
+pot.value=x2;
 let txt=king.value;
 let pis=txt.split(/(....)/).filter(c=>c);
 let alef=[...'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/='];
@@ -179,7 +201,7 @@ const bua=x=>{// из трех цифр делает 4 буквы64
 	return v
 	}
 zwai.style.backgroundImage="url('data:image/gif;base64,"+pis.join('')+"')";
-function jan(goa){
+function jan(goa){// вывод отредактированого рисунка
 	txt=king.value;
 	pis=txt.split(/(....)/).filter(c=>c);
 	pis[x1]=bua([trux(pis[x1])[0],goa[0],goa[1]])
@@ -233,7 +255,7 @@ let kodclr;
 let cur, bok, izo, dln;
 let pic=new Array(16*16).fill(0);
 
-function delo(){
+function delo(){ // разжатие LZW
 	byts=[];
 	txt=king.value;
 	pis=txt.split(/(....)/).filter(c=>c);// рубим на четыребуквенные64 слова
@@ -279,7 +301,7 @@ function delo(){
 		}
 	cur++;
 	bok=hex(byts[cur]);
-	//console.log('далее блок =',bok,cur);//	  
+	//console.log('далее блок =',bok,cur);//	  ✂
 	cur+=2;//
 	bok=hex(byts[cur]);
 	//console.log('подблок длиной =',bok,cur);//✂
@@ -358,7 +380,7 @@ function delo(){
 	let code=0;
 	let sizebit=biting;
 	const r44 = new Array(0x1001).fill(null).map(() => ({indx:0,x:0}));// ии помог
-	let h=0,h0;
+	let h=0,H;
 	let sizedic=0;
 	function deka(x){
 		for(let d=0;d<8;d++){
@@ -383,8 +405,8 @@ function delo(){
 				//console.log(bin(code));✂
 				code=0;
 				readed=0;
-			h0=h+kodend;  // рост разрядности
-			if ((!((h0-1)&h0))&&(h0>7)) sizebit++;			
+			H=h+kodend;  // рост разрядности
+			if ((!((H-1)&H))&&(H>7)) sizebit++;			
 			//*****************
 				}
 			}
@@ -399,10 +421,10 @@ function delo(){
 	//console.log(`[[[${pic.length}]]]`);✂
 	}//delo	end
 
-delo();
+delo();// разжатие LZW
 
 //*******************✂
-function gera(){
+function gera(){ // раскодировка base64 в пиксели
 	pot.value=0;
 	txt=king.value;
 	pis=txt.split(/(....)/).filter(c=>c);
@@ -413,16 +435,16 @@ function gera(){
 		parseInt(c.slice(-6).slice(2,4),16),
 		parseInt(c.slice(-6).slice(-2),16),
 		]);
-	delo();
+	delo();// разжатие LZW
 }
 
 
 king.addEventListener('change',gera);
 
-zwai.addEventListener('click', e=>{
+zwai.addEventListener('click', e=>{//клик в пиксель картинки
 //224x224✂
-	let xz=Math.trunc(e.offsetX/14); //oxz.innerHTML=xz;
-	let yz=Math.trunc(e.offsetY/14); //oyz.innerHTML=yz;
+	let xz=Math.trunc(e.offsetX/14); 
+	let yz=Math.trunc(e.offsetY/14); //
 	let cz=pic[xz+yz*16];
 	if(cz===undefined){
 	   console.log(e.offsetX,e.offsetY);
@@ -444,17 +466,23 @@ pot.addEventListener('input', function(){// стрелочные не дружа
 		}
 	});
 
-prio.addEventListener('click',()=>{
-			navigator.clipboard.readText()
-			.then(fb => {
-			//=s.slice(0, -1).replace(/(.+base64,)/,'');✂
-			fb=fb.replace(/(\".{0,3}$)/,'').replace(/(.+base64,)/,'');
-			king.value=fb;
-			gera();
-			})
-			.catch(err => {
-			console.log('Oblomingo flyed pass', err);
-			})});
+pot.addEventListener('change', ()=>{// навигатор по палитре	
+	x1=+this.value+4;
+	bmw();
+	});
+
+
+prio.addEventListener('click',()=>{ // вставка
+	navigator.clipboard.readText()
+	.then(fb => {
+		//=s.slice(0, -1).replace(/(.+base64,)/,'');✂
+		fb=fb.replace(/(\".{0,3}$)/,'').replace(/(.+base64,)/,'');
+		king.value=fb;
+		gera();
+		})
+		.catch(err => {
+		console.log('Oblomingo flyed pass', err);
+		})});
 </script>
 </body>
 </html>
