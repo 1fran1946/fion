@@ -72,12 +72,12 @@ input {margin: 2px;}
 			<input id="zyk" type="color">
 			<button id="prio">paste</button>
 			<!-- button id="grad">grad</button -->
-			<input id="fox" type="color">
 		</div>
 		<input id="pot" type="number" value="0" min="0">
 		<div class="niva">
 			<button id="robo">copy</button>
-			<button id="wash" onclick="king.value=null">clear</button>
+			<!-- button id="wash" onclick="king.value=null">clear</button -->
+			<input id="fox" type="color">
 		</div>
 	</div>
 	<div id="zwai"></div>
@@ -428,68 +428,59 @@ delo();////разрубовка туши бейс64, чтение картинк
 function eax(x) {
     // Удаляем символ #, если он есть
     const cleanHex = x.replace('#', '');
-    
     // Попарно разбираем строку и прогоняем через parseInt в 16-ричной системе
     return [
         parseInt(cleanHex.substring(0, 2), 16),
         parseInt(cleanHex.substring(2, 4), 16),
         parseInt(cleanHex.substring(4, 6), 16)
-    ];
-}
-function water(hall){
-bigA=0,bigB=0,bigC=0;
-tinA=255, tinB=255,tinC=255;
-tins=[],bigs=[],tot=[],fet=[];
-dar=eax(hall);
-for (let i=0;i<(kodclr-1); i++) {
-	let k=ros(i);
-	if(!(k[0]|k[1]|k[2]))continue;
-	if(bigA<k[0])bigA=k[0];
-	if(bigB<k[1])bigB=k[1];
-	if(bigC<k[2])bigC=k[2];
-	bigs=[bigA,bigB,bigC];
-	if(tinA>k[0])tinA=k[0];
-	if(tinB>k[1])tinB=k[1];
-	if(tinC>k[2])tinC=k[2];
-	tins=[tinA,tinB,tinC];
+		];
 	}
-fet=[bigA-tinA,bigB-tinB,bigC-tinC].map(c=>c/100);;
-tot=[];
-for (let i=0;i<(kodclr-1); i++) {
-	let r=ros(i);
-	if(!(r[0]|r[1]|r[2])){tot.push([0,0,0]);continue;}// защита от черного
-	tot.push([
-	(r[0]-tinA)/fet[0],// проценты прогресса(t)
-	(r[1]-tinB)/fet[1],
-	(r[2]-tinC)/fet[2]]);
-	}
-//let dar;//=[255,0,0];
-	//dar=eax('#9c27b0');//[0x9c,0x27,0xb0];//
-	
-for (let i=0;i<(kodclr-1); i++) {
-	let p=tot[i];
-	x1=i+4;
-	const u=x=>hex(dar[x]+
-((Math.abs(dar[x]-bigs[x])/100)*p[x])|0);
-	let c1=u(0);
-	let c2=u(1);//hex((dar[1]*p[1])|0);
-	let c3=u(2);//hex((dar[2]*p[2])|0);
-	let c=c1+c2+c3;//zyk.value;
-	jan([// меняем басе64 код и выводим картинку
-		parseInt(c.slice(-6).slice(0,2),16),
-		parseInt(c.slice(-6).slice(2,4),16),
-		parseInt(c.slice(-6).slice(-2),16),
-		]);
-}
-///
-bmw();// получаю цвет #dead01
-x1=4;
-//#9c27b0
-}// water
+function water(hall){// массированая смена оттенков путем модификации палитры
+	bigA=0,bigB=0,bigC=0;
+	tinA=255, tinB=255,tinC=255;
+	tins=[],bigs=[],tot=[],fet=[];
+	dar=eax(hall);
+	for (let i=0;i<(kodclr-1); i++) {
+		let k=ros(i);
+		if(!(k[0]|k[1]|k[2]))continue;
+		if(bigA<k[0])bigA=k[0];
+		if(bigB<k[1])bigB=k[1];
+		if(bigC<k[2])bigC=k[2];
+		bigs=[bigA,bigB,bigC];
+		if(tinA>k[0])tinA=k[0];
+		if(tinB>k[1])tinB=k[1];
+		if(tinC>k[2])tinC=k[2];
+		tins=[tinA,tinB,tinC];
+		}
+	fet=[bigA-tinA,bigB-tinB,bigC-tinC].map(c=>c/100);;
+	tot=[];
+	for (let i=0;i<(kodclr-1); i++) {
+		let r=ros(i);
+		if(!(r[0]|r[1]|r[2])){tot.push([0,0,0]);continue;}// защита от черного
+		tot.push([
+		(r[0]-tinA)/fet[0],// проценты прогресса(t)
+		(r[1]-tinB)/fet[1],
+		(r[2]-tinC)/fet[2]]);
+		}
+	for (let i=0;i<(kodclr-1); i++) {
+		let p=tot[i];
+		x1=i+4;
+		const u=x=>hex(dar[x]+
+	((Math.abs(dar[x]-bigs[x])/100)*p[x])|0);
+		let c1=u(0);
+		let c2=u(1);//hex((dar[1]*p[1])|0);
+		let c3=u(2);//hex((dar[2]*p[2])|0);
+		let c=c1+c2+c3;//zyk.value;
+		jan([// меняем басе64 код и выводим картинку
+			parseInt(c.slice(-6).slice(0,2),16),
+			parseInt(c.slice(-6).slice(2,4),16),
+			parseInt(c.slice(-6).slice(-2),16),
+			]);
+		}
+	bmw();// получаю цвет #dead01
+	x1=4;
+	}// water
 water('#9c27b0');
-//console.log('big ABC tiny');
-//console.log(`[${tins.join(',')}], [${bigs.join(',')}]`);
-//alert(';');
 function gera(){// вставка нового бейс64
 	byts=[];
 	pic=[];
